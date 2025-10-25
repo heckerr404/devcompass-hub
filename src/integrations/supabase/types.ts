@@ -176,6 +176,14 @@ export type Database = {
         | "mobile"
         | "data"
         | "design"
+        | "ai_ml"
+        | "database"
+        | "blockchain"
+        | "security"
+        | "management"
+        | "community"
+        | "infrastructure"
+        | "programming"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -310,6 +318,14 @@ export const Constants = {
         "mobile",
         "data",
         "design",
+        "ai_ml",
+        "database",
+        "blockchain",
+        "security",
+        "management",
+        "community",
+        "infrastructure",
+        "programming",
       ],
     },
   },
