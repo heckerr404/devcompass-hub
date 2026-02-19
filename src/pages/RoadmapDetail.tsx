@@ -19,7 +19,7 @@ const RoadmapDetail = () => {
         .select("*")
         .eq("id", id)
         .single();
-      
+
       if (error) throw error;
       return data;
     },
@@ -34,7 +34,7 @@ const RoadmapDetail = () => {
         .eq("roadmap_id", id)
         .order("position_y", { ascending: true })
         .order("position_x", { ascending: true });
-      
+
       if (error) throw error;
       return data;
     },
@@ -47,7 +47,7 @@ const RoadmapDetail = () => {
         .from("courses")
         .select("*")
         .eq("roadmap_id", id);
-      
+
       if (error) throw error;
       return data;
     },
@@ -110,7 +110,7 @@ const RoadmapDetail = () => {
   return (
     <div className="min-h-screen relative">
       <Navigation />
-      
+
       <main className="container mx-auto px-4 pt-24 pb-12 relative z-10">
         <Link to="/">
           <Button variant="ghost" className="mb-6 group">
@@ -136,7 +136,7 @@ const RoadmapDetail = () => {
         {/* Learning Path */}
         <div className="mb-16">
           <h2 className="text-3xl font-bold mb-8 text-center">Learning Path</h2>
-          
+
           {groupedNodes && Object.entries(groupedNodes).map(([level, levelNodes], levelIndex) => (
             <div key={level} className="mb-12" style={{ animationDelay: `${levelIndex * 100}ms` }}>
               <div className="flex items-center mb-6">
@@ -148,13 +148,13 @@ const RoadmapDetail = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {levelNodes.map((node, nodeIndex) => (
-                  <Card 
-                    key={node.id} 
+                  <Card
+                    key={node.id}
                     className="group relative overflow-hidden border-border/50 bg-gradient-to-br from-card to-card/50 p-6 transition-smooth hover:border-primary/50 hover:glow-cyan animate-fade-in"
                     style={{ animationDelay: `${(levelIndex * 100) + (nodeIndex * 50)}ms` }}
                   >
                     <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-smooth" />
-                    
+
                     <div className="relative">
                       <h3 className="text-xl font-bold mb-2 group-hover:gradient-text transition-smooth">
                         {node.title}
@@ -166,7 +166,7 @@ const RoadmapDetail = () => {
                       {node.resources && Array.isArray(node.resources) && node.resources.length > 0 && (
                         <div className="space-y-2">
                           <p className="text-xs font-semibold text-primary mb-2">Resources:</p>
-                          {node.resources.map((resource: any, idx: number) => (
+                          {node.resources.map((resource: { url: string; type: string; title: string }, idx: number) => (
                             <a
                               key={idx}
                               href={resource.url}
@@ -194,22 +194,22 @@ const RoadmapDetail = () => {
             <h2 className="text-3xl font-bold mb-8 text-center">Related Courses</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {courses.map((course, index) => (
-                <Card 
-                  key={course.id} 
+                <Card
+                  key={course.id}
                   className="group relative overflow-hidden border-border/50 bg-gradient-to-br from-card to-card/50 transition-smooth hover:border-primary/50 hover:glow-cyan animate-fade-in"
                   style={{ animationDelay: `${400 + (index * 50)}ms` }}
                 >
                   {course.thumbnail_url && (
                     <div className="relative h-48 overflow-hidden">
-                      <img 
-                        src={course.thumbnail_url} 
+                      <img
+                        src={course.thumbnail_url}
                         alt={course.title}
                         className="w-full h-full object-cover group-hover:scale-110 transition-smooth"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent"></div>
                     </div>
                   )}
-                  
+
                   <div className="p-6">
                     <Badge className={getLevelColor(course.level)} variant="outline">
                       {course.level}

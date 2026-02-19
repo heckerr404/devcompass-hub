@@ -66,10 +66,11 @@ const Auth = () => {
           description: "Successfully signed in",
         });
       }
-    } catch (error: any) {
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "An unknown error occurred";
       toast({
         title: "Error",
-        description: error.message,
+        description: message,
         variant: "destructive",
       });
     } finally {
@@ -80,7 +81,7 @@ const Auth = () => {
   return (
     <div className="min-h-screen relative">
       <Navigation />
-      
+
       <main className="container mx-auto px-4 pt-24 pb-12 relative z-10">
         <div className="max-w-md mx-auto animate-fade-in">
           <Card className="p-8 border-border/50 bg-gradient-to-br from-card to-card/50 glow-purple">
@@ -89,8 +90,8 @@ const Auth = () => {
                 {isSignUp ? "Create Account" : "Welcome Back"}
               </h1>
               <p className="text-muted-foreground">
-                {isSignUp 
-                  ? "Start your learning journey today" 
+                {isSignUp
+                  ? "Start your learning journey today"
                   : "Sign in to continue learning"}
               </p>
             </div>
@@ -130,8 +131,8 @@ const Auth = () => {
                 onClick={() => setIsSignUp(!isSignUp)}
                 className="text-sm text-muted-foreground hover:text-primary transition-smooth"
               >
-                {isSignUp 
-                  ? "Already have an account? Sign in" 
+                {isSignUp
+                  ? "Already have an account? Sign in"
                   : "Don't have an account? Sign up"}
               </button>
             </div>
